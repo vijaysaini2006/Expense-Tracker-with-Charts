@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker — Vijay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">Expense Tracker</div>
+
+    <div class="controls">
+      <div class="control">
+        <label for="currency">Currency</label>
+        <select id="currency" aria-label="Currency">
+          <option value="INR">₹ INR</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label>Theme</label>
+        <button id="themeToggle" class="chip">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- LEFT: Form + Filters -->
+    <section class="panel form-panel">
+      <h2>Add / Edit Expense</h2>
+      <form id="expenseForm">
+        <input type="hidden" id="entryId" />
+
+        <label>Amount</label>
+        <input id="amount" type="number" step="0.01" min="0" required placeholder="e.g. 2500" />
+
+        <label>Category</label>
+        <select id="category" required>
+          <option value="">-- Select Category --</option>
+          <option value="Food">🍔 Food</option>
+          <option value="Travel">✈️ Travel</option>
+          <option value="Shopping">🛍️ Shopping</option>
+          <option value="Bills">💡 Bills</option>
+          <option value="Other">🔖 Other</option>
+        </select>
+
+        <label>Date</label>
+        <input id="date" type="date" required />
+
+        <label>Note (optional)</label>
+        <input id="note" type="text" placeholder="e.g. taxi fare" />
+
+        <div class="form-row">
+          <button type="submit" class="btn primary" id="saveBtn">Add Expense</button>
+          <button type="button" class="btn ghost" id="clearBtn">Clear</button>
+        </div>
+      </form>
+
+      <hr />
+
+      <h3>Filters</h3>
+      <div class="filters">
+        <label>Category</label>
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+          <option>Food</option>
+          <option>Travel</option>
+          <option>Shopping</option>
+          <option>Bills</option>
+          <option>Other</option>
+        </select>
+
+        <label>Date From</label>
+        <input id="fromDate" type="date" />
+        <label>Date To</label>
+        <input id="toDate" type="date" />
+
+        <div class="filter-row">
+          <button id="applyFilter" class="btn primary small">Apply</button>
+          <button id="resetFilter" class="btn ghost small">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Summary + List + Charts -->
+    <section class="panel analytics-panel">
+      <div class="summary">
+        <div>
+          <div class="label">Total</div>
+          <div id="totalAmount" class="big">0</div>
+        </div>
+        <div>
+          <div class="label">This Month</div>
+          <div id="monthAmount" class="big">0</div>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="chart card">
+          <h4>Category Breakdown</h4>
+          <svg id="pieChart" viewBox="0 0 200 200"></svg>
+        </div>
+
+        <div class="chart card">
+          <h4>Monthly Trend (6 months)</h4>
+          <svg id="barChart" viewBox="0 0 300 120"></svg>
+        </div>
+      </div>
+
+      <h3>Expenses</h3>
+      <div id="list" class="list card"></div>
+    </section>
+  </main>
+
+  <template id="listItemTemplate">
+    <div class="list-item">
+      <div class="left">
+        <div class="cat icon"></div>
+        <div class="meta">
+          <div class="title"></div>
+          <div class="note"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="amt"></div>
+        <div class="date"></div>
+        <div class="actions">
+          <button class="edit small">Edit</button>
+          <button class="del small">Delete</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
